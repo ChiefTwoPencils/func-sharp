@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 namespace Functional
 {
+    using static F;
     public static partial class F
     {
         public static Option<T> Some<T>(T value) => new Option.Some<T>(value);
@@ -31,10 +32,13 @@ namespace Functional
         {
             if (IsSome) yield return Value;
         }
+
+        public R Match<R>(Func<R> none, Func<T, R> some)
+            => IsSome ? some(Value) : none();
         
         public static implicit operator Option<T>(Option.None _) => new Option<T>();
         public static implicit operator Option<T>(Option.Some<T> some) => new Option<T>(some.Value);
-        public static implicit operator Option<T>(T value) => value == null ? F.None : F.Some(value);
+        public static implicit operator Option<T>(T value) => value == null ? None : Some(value);
 
         public bool Equals(Option<T> other) =>
             IsSome && other.IsSome
@@ -69,6 +73,21 @@ namespace Functional
         {
             internal static readonly None Default = new None();
         }
+    }
+
+    public static class OptionExt
+    {
+        public static Option<R> Map<T, R>(this Option.Some<T> some, Func<T, R> func)
+            => Some(func(some.Value));
+
+        public static Option<R> Map<T, R>(this Option.None _, Func<T, R> func)
+            => None;
+
+        public static Option<R> Map<T, R>(this Option<T> option, Func<T, R> func)
+            => option.Match(() => None, t => Some(func(t)));
+
+        public static Option<R> Bind<T, R>(this Option<T> option, Func<T, Option<R>> func)
+            => option.Match(() => None, func);
     }
 
     public class WrapException : ArgumentException
