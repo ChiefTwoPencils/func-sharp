@@ -88,6 +88,21 @@ namespace Functional
 
         public static Option<R> Bind<T, R>(this Option<T> option, Func<T, Option<R>> func)
             => option.Match(() => None, func);
+
+        public static Option<R> Select<T, R>(this Option<T> option, Func<T, R> func)
+            => option.Map(func);
+
+        public static Option<P> SelectMany<T, R, P>(this Option<T> option, Func<T, Option<R>> bind,
+            Func<T, R, P> project) => option.Match(
+            () => None,
+            t => bind(t).Match(
+                () => None,
+                r => Some(project(t, r))));
+
+        public static Option<T> Where<T>(this Option<T> option, Func<T, bool> predicate)
+            => option.Match(
+                () => None,
+                t => predicate(t) ? option : None);
     }
 
     public class WrapException : ArgumentException
