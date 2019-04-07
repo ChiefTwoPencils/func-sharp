@@ -82,10 +82,10 @@ namespace Functional
     public static class EitherExt
     {
         public static Either<L, RR> Map<L, R, RR>(this Either<L, R> either, Func<R, RR> func)
-            => either.Match<Either<L, RR>>(Left, r => Right(func(r)));
+            => either.Match<Either<L, RR>>(l => Left(l), r => Right(func(r)));
 
         public static Either<L, RR> Bind<L, R, RR>(this Either<L, R> either, Func<R, RR> func)
-            => either.Match<Either<L, RR>>(Left, r => func(r));
+            => either.Match<Either<L, RR>>(l => Left(l), r => func(r));
 
         public static Either<L, Unit> ForEach<L, R>(this Either<L, R> either, Action<R> action)
             => Map(either, action.ToFunc());
@@ -95,9 +95,9 @@ namespace Functional
 
         public static Either<L, P> SelectMany<L, R, RR, P>(this Either<L, R> either, Func<R, Either<L, RR>> bind,
             Func<R, RR, P> project) => either.Match(
-            Left,
+            l => Left(l),
             r => bind(either.Right).Match<Either<L, P>>(
-                    Left,
+                    l => Left(l),
                     rr => project(r, rr)));
     }
 }

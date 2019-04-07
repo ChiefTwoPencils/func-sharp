@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Functional", "Functional\Functional.csproj", "{F56B91B1-0A0D-4130-B050-364E3AB7C275}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebFunc", "WebFunc\WebFunc.csproj", "{3AF0501C-AE50-4340-A59D-6E4C2519B9C8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{F56B91B1-0A0D-4130-B050-364E3AB7C275}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F56B91B1-0A0D-4130-B050-364E3AB7C275}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F56B91B1-0A0D-4130-B050-364E3AB7C275}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3AF0501C-AE50-4340-A59D-6E4C2519B9C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3AF0501C-AE50-4340-A59D-6E4C2519B9C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3AF0501C-AE50-4340-A59D-6E4C2519B9C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3AF0501C-AE50-4340-A59D-6E4C2519B9C8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
