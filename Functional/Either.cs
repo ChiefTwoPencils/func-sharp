@@ -77,4 +77,16 @@ namespace Functional
             public override string ToString() => $"Right({Value})";
         }
     }
+
+    public static class EitherExt
+    {
+        public static Either<L, RR> Map<L, R, RR>(this Either<L, R> either, Func<R, RR> func)
+            => either.Match<Either<L, RR>>(F.Left, r => F.Right(func(r)));
+
+        public static Either<L, RR> Bind<L, R, RR>(this Either<L, R> either, Func<R, RR> func)
+            => either.Match<Either<L, RR>>(F.Left, r => func(r));
+
+        public static Either<L, Unit> ForEach<L, R>(this Either<L, R> either, Action<R> action)
+            => Map(either, action.ToFunc());
+    }
 }
