@@ -5,6 +5,7 @@ using System.Collections.Generic;
 namespace Functional
 {
     using static F;
+    
     public static partial class F
     {
         public static Option<T> Some<T>(T value) => new Option.Some<T>(value);
