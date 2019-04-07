@@ -88,5 +88,15 @@ namespace Functional
 
         public static Either<L, Unit> ForEach<L, R>(this Either<L, R> either, Action<R> action)
             => Map(either, action.ToFunc());
+
+        public static Either<L, RR> Select<L, R, RR>(this Either<L, R> either, Func<R, RR> func)
+            => either.Map(func);
+
+        public static Either<L, P> SelectMany<L, R, RR, P>(this Either<L, R> either, Func<R, Either<L, RR>> bind,
+            Func<R, RR, P> project) => either.Match(
+            F.Left,
+            r => bind(either.Right).Match<Either<L, P>>(
+                    F.Left,
+                    rr => project(r, rr)));
     }
 }
