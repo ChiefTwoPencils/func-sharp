@@ -13,4 +13,9 @@
       <ProjectReference Include="..\Functional\Functional.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Controllers\Api" />
+      <Folder Include="Dtos" />
+    </ItemGroup>
+
 </Project>

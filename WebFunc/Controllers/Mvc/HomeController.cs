@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using WebFunc.Models;
 
-namespace WebFunc.Controllers
+namespace WebFunc.Controllers.Mvc
 {
     public class HomeController : Controller
     {
